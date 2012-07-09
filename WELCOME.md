@@ -18,7 +18,7 @@ Slimfra comes with a few example routes defined in `index.php`, one example cont
     * `js/` - a place for storing javascript files
     * `css/` - a place for storing css stylesheets
     * `images/` - a place for storing images that are referenced from css stylesheets
-* `src/` - Your PHP code goes here.  All code in this directory should be organized according to the [`PSR-0`](https://gist.github.com/1234504/) standard - if it is, it will autoload as its called.  If you have libraries of plain functions you want to load, you will have to `include()` them manually in your code.
+* `src/` - Your PHP code goes here.  All code in this directory should be organized according to the [`PSR-0`](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md) standard - if it is, it will autoload as its called.  If you have libraries of plain functions you want to load, you will have to `include()` them manually in your code.  Write code people will recognize without much struggle, following the [`PSR-2`](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) coding standards is highly recommended.
 * `templates/` - This is a directory for Twig templates.  Twig is the only templating system included, because they're cleaner, and strictly limit what kinds of logic you can do in a template file, ensuring that yoru logic stays in your PHP classes, where it belongs.
 * `uploads/` - A default directory for file uploads.
 
