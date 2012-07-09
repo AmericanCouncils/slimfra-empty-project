@@ -2,9 +2,9 @@
     "autoload": {
         "psr-0": { "": "src/" }
     },
-	"minimum-stability": "dev",
+    "minimum-stability": "dev",
     "require": {
         "php": ">=5.3.3",
         "ac/slimfra": "dev-master"
-	}
+    }
 }

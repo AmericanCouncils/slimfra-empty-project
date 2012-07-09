@@ -11,10 +11,10 @@ include 'vendor/autoload.php';
 
 //or instantiate app directly with an array of configuration
 $app = new Slimfra\Application(array(
-	'app_name' => "Example Project",
-	'footer' => "Copyright [your_name] 2012 &copy;",
-	'menu' => array(),
-	'debug' => true,
+    'app_name' => "Example Project",
+    'footer' => "Copyright [your_name] 2012 &copy;",
+    'menu' => array(),
+    'debug' => true,
 ));
 
 //If you have custom container service providers, you should instantiate those here
