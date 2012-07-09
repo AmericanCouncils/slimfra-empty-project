@@ -1,0 +1,1 @@
+A place for storing images included from CSS stylesheets.
