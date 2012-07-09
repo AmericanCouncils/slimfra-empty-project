@@ -6,7 +6,7 @@ Slimfra comes with a few example routes defined in `index.php`, one example cont
 
 ## Project structure ##
 
-* `index.php` - This is the entry point for the application.  In this file is where you instantiate your app with configuration, register any custom service providers, and connect routes to your located in `src/`.
+* `index.php` - This is the entry point for the application.  In this file is where you instantiate your app with configuration, register any custom service providers, and connect routes to your code located in `src/`.
 * `composer.json` - This is where you declare what libraries your project requires.
 * `README.md` - This is a file for documenting your project so that others can understand it
 * `.htaccess` - This is default configuration for the Apache web server, it allows you to remove `index.php` from the urls in your project.
@@ -18,7 +18,7 @@ Slimfra comes with a few example routes defined in `index.php`, one example cont
     * `js/` - a place for storing javascript files
     * `css/` - a place for storing css stylesheets
     * `images/` - a place for storing images that are referenced from css stylesheets
-* `src/` - Your PHP code goes here.  All code in this directory should be organized according to the `PSR-0` standard - if it is, it will autoload as its called.  If you have libraries of plain functions you want to load, you will have to `include()` them manually in your code.
+* `src/` - Your PHP code goes here.  All code in this directory should be organized according to the [`PSR-0`](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md) standard - if it is, it will autoload as its called.  If you have libraries of plain functions you want to load, you will have to `include()` them manually in your code.  Write code people will recognize without much struggle, following the [`PSR-2`](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) coding standards is highly recommended.
 * `templates/` - This is a directory for Twig templates.  Twig is the only templating system included, because they're cleaner, and strictly limit what kinds of logic you can do in a template file, ensuring that yoru logic stays in your PHP classes, where it belongs.
 * `uploads/` - A default directory for file uploads.
 
@@ -80,4 +80,4 @@ If your controller classes extend `Slimfra\Controller`, they will automatically 
 
 Dependency injection allows you to use objects which may require complicated setup much easier, and sharable throughout the application in a way that doesn't force you to rely on global variables or singletons.  This lets you write code that is easy to test, and far more reusable than it would be otherwise.  For more on dependency injection, check out the [Silex documentation](http://silex.sensiolabs.org/doc/services.html) on the subject.
 
-Container services are registered via Providers.  If you have custom providers to register, you register itbefore you execute the application via `$app->run()`.  For more on registering providers, check out the [Silex documentation](http://silex.sensiolabs.org/doc/providers.html).
+Container services are registered via Providers.  If you have custom providers to register, you must register them before you execute the application via `$app->run()`.  For more on registering providers, check out the [Silex documentation](http://silex.sensiolabs.org/doc/providers.html).
