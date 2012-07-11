@@ -2,3 +2,4 @@ vendor/
 vendor/*
 app/cache/*
 app/data/*
+composer.phar
