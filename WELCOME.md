@@ -1,14 +1,16 @@
 # Welcome #
 
-Welcome to your new Slimfra project.  Everything you need to know about the project, in terms of routes, handling code, and custom services should be immediately apparent from scanning `index.php`.
+Welcome to your new Slimfra project.  Everything you need to know about the project, in terms of routes, handling code, and custom services should be immediately apparent from scanning `bootstrap.php` and `index.php`.
 
 Slimfra comes with a few example routes defined in `index.php`, one example controller and an example Twig template, to demonstrate how it works.  Once it makes sense, you can safely delete the included controller and templates, and start building a custom project.
 
 ## Project structure ##
 
-* `index.php` - This is the entry point for the application.  In this file is where you instantiate your app with configuration, register any custom service providers, and connect routes to your code located in `src/`.
+* `bootstrap.php` - This sets up the base application with custom configuration and container services.  The app returned from this script is either run for the web via `index.php` or on the command line via `console`
+* `index.php` - This is the entry point for the web application.  In this file is where you connect routes to your code located in `src/`, and process web requests.
+* `console` - This is the entry point for command-line operations.  In here you register custom commands and process cli commands.  To avoid having to type `php` all the time, you can run `chmod a+x console` to simply run `console` in the command line.
 * `composer.json` - This is where you declare what libraries your project requires.
-* `README.md` - This is a file for documenting your project so that others can understand it
+* `README.md` - This is a file for documenting your project so that others can understand it.
 * `.htaccess` - This is default configuration for the Apache web server, it allows you to remove `index.php` from the urls in your project.
 * `app/` - This directory is for data that holds the state of an application.  The app must be able to write to this directory and all its subdirectories.
     * `cache/` - Cache items stored in the file system are stored here.  You should be always be able to safely delete everything in this directory.
@@ -18,11 +20,12 @@ Slimfra comes with a few example routes defined in `index.php`, one example cont
     * `js/` - a place for storing javascript files
     * `css/` - a place for storing css stylesheets
     * `images/` - a place for storing images that are referenced from css stylesheets
-* `src/` - Your PHP code goes here.  All code in this directory should be organized according to the [`PSR-0`](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md) standard - if it is, it will autoload as its called.  If you have libraries of plain functions you want to load, you will have to `include()` them manually in your code.  Write code people will recognize without much struggle, following the [`PSR-2`](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) coding standards is highly recommended.
+* `src/` - Your custom PHP code for your project goes here.  All code in this directory should be organized according to the [`PSR-0`](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md) standard - if it is, it will autoload as its called.  If you have libraries of plain functions you want to load, you will have to `include()` them manually in your code.  Write code people will recognize without much struggle, following the [`PSR-2`](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) coding standards is highly recommended.
 * `templates/` - This is a directory for Twig templates.  Twig is the only templating system included, because they're cleaner, and strictly limit what kinds of logic you can do in a template file, ensuring that yoru logic stays in your PHP classes, where it belongs.
-* `uploads/` - A default directory for file uploads.
 
 ## Getting started ##
+
+Any application setup that needs to be shared between the web and cli environments should take place in `bootstrap.php`.  Read the documentation in that file for more information.
 
 The `index.php` file contains comments that describe what each line means.  You can delete the comments and provided code + controllers to start work on your own project.
 
@@ -34,7 +37,8 @@ The Slimfra app can be built with your custom configuration in two ways - either
     //directly with configuration
     $app = new Slimfra\Application(array(
         'app.name' => "Example Project",
-        'app.footer' => "Some footer text",
+        'app.version' => "1",
+        'footer' => "Some footer text",
         'debug' => true
     ));
     
@@ -45,7 +49,7 @@ The Slimfra app can be built with your custom configuration in two ways - either
 
 ## Routes and Controllers ##
 
-Slimfra makes it easy to connect application routes to code.  You can see a few examples below, but it's worth reading the [Silex documentation](http://silex.sensiolabs.org/doc/usage.html#routing) as well.  The biggest difference between Slimfra and Silex in this regard, is that by default Controllers are specified as a string, instead of a Closure - but you can define your controllers that way as well if you like.
+Slimfra makes it easy to connect application routes to code in `index.php`.  You can see a few examples below, but it's worth reading the [Silex documentation](http://silex.sensiolabs.org/doc/usage.html#routing) as well.  The biggest difference between Slimfra and Silex in this regard, is that by default Controllers are specified as a string, instead of a Closure - but you can define your controllers that way as well if you like.
 
     //will allow a request of any type to go through
     $app->any("/", "ControllerName::methodName");
@@ -75,6 +79,12 @@ If your controller classes extend `Slimfra\Controller`, they will automatically 
             $this->app->abort(404, "Content not found.");
         }
     }
+    
+## CLI Commands ##
+
+You can easily add custom CLI commands to your project in `console`.  See `src/Command/HelloWorldCommand.php` for more on commands.
+
+To run the default command include with this skeleton project, just type `php console hello` from the project root.
 
 ## Services and Dependency Injection ##
 
