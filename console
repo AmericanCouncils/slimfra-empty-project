@@ -1,0 +1,14 @@
+#!/usr/bin/env php
+<?php
+
+//bootstrap the app with configuration and services defined in bootstrap.php
+$app = require 'bootstrap.php';
+
+//build a console with the app
+$console = new Slimfra\Console($app);
+
+//register CLI commands here
+$console->add(new Command\HelloWorldCommand());
+
+//run the console
+$console->run();
